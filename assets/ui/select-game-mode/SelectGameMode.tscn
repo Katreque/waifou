@@ -1,0 +1,64 @@
+[gd_scene load_steps=3 format=3 uid="uid://0qrcbgbxmyaq"]
+
+[ext_resource type="Theme" uid="uid://c5y7mk7u1fc0c" path="res://assets/ui/themes/default.tres" id="1_qtmxg"]
+[ext_resource type="PackedScene" uid="uid://bv80on500234h" path="res://assets/ui/select-game-mode/game-mode-item/GameModeItem.tscn" id="2_ukg5l"]
+
+[node name="SelectGameMode" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Container" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -276.0
+offset_top = -198.5
+offset_right = 276.0
+offset_bottom = 198.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_qtmxg")
+
+[node name="Margin" type="MarginContainer" parent="Container"]
+layout_mode = 2
+theme_override_constants/margin_left = 56
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 56
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Container/Margin/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("1_qtmxg")
+theme_override_font_sizes/bold_font_size = 32
+bbcode_enabled = true
+text = "[center][b]Escolha o Modo de Jogo[/b][/center]"
+fit_content = true
+
+[node name="GridContainer" type="GridContainer" parent="Container/Margin/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 40
+columns = 3
+
+[node name="Aquou" parent="Container/Margin/VBoxContainer/GridContainer" instance=ExtResource("2_ukg5l")]
+layout_mode = 2
+modeName = "Aquou"
+
+[node name="Redected" parent="Container/Margin/VBoxContainer/GridContainer" instance=ExtResource("2_ukg5l")]
+layout_mode = 2
+modeName = "[REDECTED]"

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://tgrpx3w0tlsy"]
+
+[ext_resource type="Theme" uid="uid://c5y7mk7u1fc0c" path="res://assets/ui/themes/default.tres" id="1_wl83w"]
+
+[node name="Button" type="Button"]
+custom_minimum_size = Vector2(125, 60)
+theme = ExtResource("1_wl83w")
+text = "Teste"

@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=3 uid="uid://4g2xs0sw7yr"]
+
+[ext_resource type="Theme" uid="uid://c5y7mk7u1fc0c" path="res://assets/ui/themes/default.tres" id="1_n17pn"]
+[ext_resource type="Texture2D" uid="uid://bd1qnf6vevkg3" path="res://assets/ui/icons/plus/plus-normal.png" id="2_ued6g"]
+[ext_resource type="Texture2D" uid="uid://m4c5epxw381h" path="res://assets/ui/icons/plus/plus-pressed.png" id="3_2px1u"]
+[ext_resource type="Texture2D" uid="uid://cdx4r146tyhtv" path="res://assets/ui/icons/plus/plus-hover.png" id="3_vs0ek"]
+[ext_resource type="Texture2D" uid="uid://bfbcpotcl2gig" path="res://assets/ui/icons/reload/reload-normal.png" id="5_aspi3"]
+[ext_resource type="Texture2D" uid="uid://c5s08xsqlvcix" path="res://assets/ui/icons/reload/reload-pressed.png" id="6_1ssf8"]
+[ext_resource type="Texture2D" uid="uid://b12cwbulr2kn0" path="res://assets/ui/icons/reload/reload-hover.png" id="7_wct5h"]
+
+[node name="LobbyList" type="Control"]
+layout_mode = 3
+anchor_left = 0.3
+anchor_top = 0.1
+anchor_right = 0.7
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_n17pn")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_n17pn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 2
+
+[node name="Add" type="TextureButton" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme = ExtResource("1_n17pn")
+texture_normal = ExtResource("2_ued6g")
+texture_pressed = ExtResource("3_2px1u")
+texture_hover = ExtResource("3_vs0ek")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Reload" type="TextureButton" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme = ExtResource("1_n17pn")
+texture_normal = ExtResource("5_aspi3")
+texture_pressed = ExtResource("6_1ssf8")
+texture_hover = ExtResource("7_wct5h")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
