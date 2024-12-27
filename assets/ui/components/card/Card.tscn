@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyw4v242sntb3"]
+
+[ext_resource type="Theme" uid="uid://c5y7mk7u1fc0c" path="res://assets/ui/themes/default.tres" id="1_tjm5b"]
+[ext_resource type="Script" path="res://assets/ui/components/card/card.gd" id="2_40xm8"]
+
+[node name="Card" type="PanelContainer"]
+theme = ExtResource("1_tjm5b")
+script = ExtResource("2_40xm8")
+
+[node name="Button" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+clip_contents = true
+layout_mode = 2
+mouse_default_cursor_shape = 2

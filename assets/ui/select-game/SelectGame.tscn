@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=3 uid="uid://ci8t1p4ac1cgv"]
+
+[ext_resource type="Script" path="res://assets/ui/select-game/select-game.gd" id="1_3dqw2"]
+[ext_resource type="Theme" uid="uid://c5y7mk7u1fc0c" path="res://assets/ui/themes/default.tres" id="1_5qmfe"]
+[ext_resource type="PackedScene" uid="uid://0qrcbgbxmyaq" path="res://assets/ui/select-game/select-game-mode/SelectGameMode.tscn" id="2_vqyjw"]
+[ext_resource type="PackedScene" uid="uid://s82xam8tguxs" path="res://assets/ui/select-game/select-game-type/SelectGameType.tscn" id="3_5226v"]
+
+[node name="SelectGame" type="Control"]
+layout_mode = 3
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3dqw2")
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+ratio = 1.67
+
+[node name="Panel" type="Panel" parent="AspectRatioContainer"]
+clip_contents = true
+layout_mode = 2
+theme = ExtResource("1_5qmfe")
+
+[node name="SelectGameMode" parent="AspectRatioContainer/Panel" instance=ExtResource("2_vqyjw")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -541.08
+offset_top = -324.0
+offset_right = 541.08
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SelectGameType" parent="AspectRatioContainer/Panel" instance=ExtResource("3_5226v")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -460.0
+offset_top = -303.5
+offset_right = 460.0
+offset_bottom = 303.5
+grow_horizontal = 2
+grow_vertical = 2

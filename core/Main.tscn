@@ -1,11 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2dipnlt1snmg"]
+[gd_scene load_steps=4 format=3 uid="uid://b2dipnlt1snmg"]
 
 [ext_resource type="Script" path="res://core/main.gd" id="1_d5ttm"]
-[ext_resource type="PackedScene" uid="uid://0qrcbgbxmyaq" path="res://assets/ui/select-game-mode/SelectGameMode.tscn" id="2_rhnix"]
+[ext_resource type="PackedScene" uid="uid://ci8t1p4ac1cgv" path="res://assets/ui/select-game/SelectGame.tscn" id="2_0th8o"]
+[ext_resource type="PackedScene" uid="uid://cnd4kx4qvb7w6" path="res://assets/ui/main-menu/MainMenu.tscn" id="2_kbw5p"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_d5ttm")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="SelectGameMode" parent="CanvasLayer" instance=ExtResource("2_rhnix")]
+[node name="MainMenu" parent="CanvasLayer" instance=ExtResource("2_kbw5p")]
+visible = false
+
+[node name="SelectGame" parent="CanvasLayer" instance=ExtResource("2_0th8o")]
+visible = false

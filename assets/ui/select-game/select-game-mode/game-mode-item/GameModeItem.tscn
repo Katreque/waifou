@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://bv80on500234h"]
+
+[ext_resource type="Script" path="res://assets/ui/select-game/select-game-mode/game-mode-item/game-mode-item.gd" id="1_51b6n"]
+[ext_resource type="FontFile" uid="uid://ce1eg8tg58ca0" path="res://assets/ui/fonts/Atma-Bold.ttf" id="1_qggeu"]
+[ext_resource type="PackedScene" uid="uid://dyw4v242sntb3" path="res://assets/ui/components/card/Card.tscn" id="3_xsxfr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sboqr"]
+
+[node name="GameModeItem" type="Panel"]
+clip_contents = true
+custom_minimum_size = Vector2(288, 336)
+offset_right = 288.0
+offset_bottom = 336.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_sboqr")
+script = ExtResource("1_51b6n")
+modeName = "Mode Name"
+
+[node name="Card" parent="." instance=ExtResource("3_xsxfr")]
+layout_mode = 2
+offset_right = 288.0
+offset_bottom = 336.0
+
+[node name="Margin" type="MarginContainer" parent="Card"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="GameModeItem" type="VBoxContainer" parent="Card/Margin"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="Card/Margin/GameModeItem"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+
+[node name="Btn" type="TextureButton" parent="Card/Margin/GameModeItem/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+stretch_mode = 5
+
+[node name="Text" type="RichTextLabel" parent="Card/Margin/GameModeItem"]
+layout_mode = 2
+theme_override_fonts/bold_font = ExtResource("1_qggeu")
+theme_override_font_sizes/bold_font_size = 24
+bbcode_enabled = true
+text = "[center][b]Text[/b][/center]"
+fit_content = true
