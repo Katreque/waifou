@@ -1,17 +1,25 @@
 extends Control
 
-@onready var SelectGameMode: VBoxContainer = $AspectRatioContainer/Panel/SelectGameMode
-@onready var SelectGameModeAquouBtn: Button = $AspectRatioContainer/Panel/SelectGameMode/GridContainer/Aquou/Card/Button
-@onready var SelectGameModeBackBtn: Button = $AspectRatioContainer/Panel/SelectGameMode/Back
-@onready var SelectGameType: VBoxContainer = $AspectRatioContainer/Panel/SelectGameType
-@onready var SelectGameTypeBackBtn: Button = $AspectRatioContainer/Panel/SelectGameType/Back
+@onready var SelectGameMode: VBoxContainer = $AspectRatioContainer/MainPanel/VBoxContainer/Control/SelectGameMode
+@onready var SelectGameModeAquouBtn: Button = $AspectRatioContainer/MainPanel/VBoxContainer/Control/SelectGameMode/GridContainer/Aquou/Card/Button
+@onready var SelectGameType: Panel = $AspectRatioContainer/MainPanel/VBoxContainer/Control/SelectGameType
+@onready var BackBtn: Button = $AspectRatioContainer/MainPanel/VBoxContainer/MarginContainer/Back
 
 func _ready() -> void:
-	SelectGameModeBackBtn.pressed.connect(func(): visible = false)
-	SelectGameModeAquouBtn.pressed.connect(Callable(self, 'OnAquouBtnClicked'))
-	SelectGameTypeBackBtn.pressed.connect(Callable(self, 'showSelectGameMode'))
+	SelectGameModeAquouBtn.pressed.connect(Callable(self, 'OnAquouBtnPressed'))
+	BackBtn.pressed.connect(Callable(self, 'OnBackBtnPressed'))
 
-func OnAquouBtnClicked():
+func OnBackBtnPressed():
+	if SelectGameMode.visible:
+		self.visible = false
+		return
+	
+	showSelectGameMode()
+
+func OnAquouBtnPressed():
+	var gameMode = Lobby.GameModes.AQUOU
+	Lobby.setGameMode(gameMode)
+	SelectGameType.setGameTypeItems(gameMode)
 	showSelectGameType()
 
 func showSelectGameMode():

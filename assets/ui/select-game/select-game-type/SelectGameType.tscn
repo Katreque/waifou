@@ -1,82 +1,40 @@
 [gd_scene load_steps=4 format=3 uid="uid://s82xam8tguxs"]
 
-[ext_resource type="Theme" uid="uid://c5y7mk7u1fc0c" path="res://assets/ui/themes/default.tres" id="1_d0351"]
-[ext_resource type="PackedScene" uid="uid://dyw4v242sntb3" path="res://assets/ui/components/card/Card.tscn" id="2_msgvv"]
-[ext_resource type="PackedScene" uid="uid://tgrpx3w0tlsy" path="res://assets/ui/components/button/Button.tscn" id="3_ngybg"]
+[ext_resource type="Script" path="res://assets/ui/select-game/select-game-type/select-game-type.gd" id="1_iplev"]
+[ext_resource type="PackedScene" uid="uid://bgp24bwjg3dx4" path="res://assets/ui/select-game/select-game-type/game-type-item/GameTypeItem.tscn" id="2_nwbsm"]
 
-[node name="SelectGameType" type="VBoxContainer"]
-offset_right = 920.0
-offset_bottom = 607.0
-theme_override_constants/separation = 20
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dueh4"]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_constants/separation = 20
-
-[node name="ClassicContainer" parent="HBoxContainer" instance=ExtResource("2_msgvv")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/ClassicContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/ClassicContainer/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("1_d0351")
-
-[node name="Label" type="RichTextLabel" parent="HBoxContainer/ClassicContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/bold_font_size = 32
-bbcode_enabled = true
-text = "[center][b]Clássico[/b][/center]"
-fit_content = true
-
-[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/ClassicContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempor tincidunt tellus, vitae ultricies est. Quisque porttitor ornare convallis. Nam porttitor ipsum libero, a pharetra urna vulputate et. Cras et euismod velit. Maecenas nec tortor dignissim, blandit felis iaculis, convallis nisi. Quisque sed velit euismod, fermentum dolor ut, pretium leo. Ut interdum consectetur scelerisque. Curabitur maximus venenatis nulla, non facilisis turpis pellentesque sit amet. Maecenas pretium enim et feugiat ultrices. Curabitur urna tellus, lacinia tincidunt arcu eu, dapibus egestas turpis.
-
-Phasellus eu dolor condimentum, elementum elit sit amet, semper leo. Cras eu consectetur nisi. Curabitur ultrices augue vel est facilisis maximus. Nullam non viverra leo. Curabitur hendrerit pretium molestie. Duis leo odio, luctus sed euismod nec, aliquet nec tellus. Curabitur et urna ligula. Fusce orci ligula, iaculis eget sem eget, malesuada consequat sapien."
-fit_content = true
-
-[node name="WaifouContainer" parent="HBoxContainer" instance=ExtResource("2_msgvv")]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/WaifouContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/WaifouContainer/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label" type="RichTextLabel" parent="HBoxContainer/WaifouContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_font_sizes/bold_font_size = 32
-bbcode_enabled = true
-text = "[center][b]Waifou[/b][/center]"
-fit_content = true
-
-[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/WaifouContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempor tincidunt tellus, vitae ultricies est. Quisque porttitor ornare convallis. Nam porttitor ipsum libero, a pharetra urna vulputate et. Cras et euismod velit. Maecenas nec tortor dignissim, blandit felis iaculis, convallis nisi. Quisque sed velit euismod, fermentum dolor ut, pretium leo. Ut interdum consectetur scelerisque. Curabitur maximus venenatis nulla, non facilisis turpis pellentesque sit amet. Maecenas pretium enim et feugiat ultrices. Curabitur urna tellus, lacinia tincidunt arcu eu, dapibus egestas turpis.
-
-Phasellus eu dolor condimentum, elementum elit sit amet, semper leo. Cras eu consectetur nisi. Curabitur ultrices augue vel est facilisis maximus. Nullam non viverra leo. Curabitur hendrerit pretium molestie. Duis leo odio, luctus sed euismod nec, aliquet nec tellus. Curabitur et urna ligula. Fusce orci ligula, iaculis eget sem eget, malesuada consequat sapien."
-fit_content = true
-
-[node name="Back" parent="." instance=ExtResource("3_ngybg")]
-layout_mode = 2
+[node name="SelectGameType" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
-text = "Voltar
-"
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxEmpty_dueh4")
+script = ExtResource("1_iplev")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+follow_focus = true
+vertical_scroll_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_constants/separation = 16
+
+[node name="GameTypeItem" parent="ScrollContainer/HBoxContainer" instance=ExtResource("2_nwbsm")]
+layout_mode = 2
+
+[node name="GameTypeItem2" parent="ScrollContainer/HBoxContainer" instance=ExtResource("2_nwbsm")]
+layout_mode = 2

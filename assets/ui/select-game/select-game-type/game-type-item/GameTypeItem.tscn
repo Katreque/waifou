@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=3 uid="uid://bgp24bwjg3dx4"]
+
+[ext_resource type="Script" path="res://assets/ui/select-game/select-game-type/game-type-item/game-type-item.gd" id="1_8n52r"]
+[ext_resource type="PackedScene" uid="uid://dyw4v242sntb3" path="res://assets/ui/components/card/Card.tscn" id="1_vwaet"]
+[ext_resource type="Theme" uid="uid://c5y7mk7u1fc0c" path="res://assets/ui/themes/default.tres" id="2_0etug"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7i2le"]
+
+[node name="GameTypeItem" type="PanelContainer"]
+offset_right = 400.0
+offset_bottom = 400.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_7i2le")
+script = ExtResource("1_8n52r")
+
+[node name="Card" parent="." instance=ExtResource("1_vwaet")]
+custom_minimum_size = Vector2(400, 500)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Margin" type="MarginContainer" parent="Card"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Scroll" type="ScrollContainer" parent="Card/Margin"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="Margin" type="MarginContainer" parent="Card/Margin/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_right = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Card/Margin/Scroll/Margin"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_0etug")
+
+[node name="Label" type="RichTextLabel" parent="Card/Margin/Scroll/Margin/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/bold_font_size = 32
+bbcode_enabled = true
+text = "[center][b]Title[/b][/center]"
+fit_content = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Card/Margin/Scroll/Margin/VBoxContainer"]
+layout_mode = 2
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempor tincidunt tellus, vitae ultricies est. Quisque porttitor ornare convallis. Nam porttitor ipsum libero, a pharetra urna vulputate et. Cras et euismod velit. Maecenas nec tortor dignissim, blandit felis iaculis, convallis nisi. Quisque sed velit euismod, fermentum dolor ut, pretium leo. Ut interdum consectetur scelerisque. Curabitur maximus venenatis nulla, non facilisis turpis pellentesque sit amet. Maecenas pretium enim et feugiat ultrices. Curabitur urna tellus, lacinia tincidunt arcu eu, dapibus egestas turpis.
+
+Phasellus eu dolor condimentum, elementum elit sit amet, semper leo. Cras eu consectetur nisi. Curabitur ultrices augue vel est facilisis maximus. Nullam non viverra leo. Curabitur hendrerit pretium molestie. Duis leo odio, luctus sed euismod nec, aliquet nec tellus. Curabitur et urna ligula. Fusce orci ligula, iaculis eget sem eget, malesuada consequat sapien."
+fit_content = true
