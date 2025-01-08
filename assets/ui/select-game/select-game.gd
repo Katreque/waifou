@@ -12,6 +12,7 @@ func _ready() -> void:
 func OnBackBtnPressed():
 	if SelectGameMode.visible:
 		self.visible = false
+		Core.getUserInterfaceManager().showMainMenuScreen()
 		return
 	
 	showSelectGameMode()

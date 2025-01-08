@@ -1,0 +1,116 @@
+[gd_scene load_steps=5 format=3 uid="uid://dty4bvlopink0"]
+
+[ext_resource type="StyleBox" uid="uid://bicv8ot4g3ppl" path="res://assets/ui/themes/flat-dark-panel.tres" id="1_hfme4"]
+[ext_resource type="Script" path="res://assets/ui/lobby/lobby.gd" id="1_y07ey"]
+[ext_resource type="Theme" uid="uid://c5y7mk7u1fc0c" path="res://assets/ui/themes/default.tres" id="3_0d3ss"]
+[ext_resource type="PackedScene" uid="uid://tgrpx3w0tlsy" path="res://assets/ui/components/button/Button.tscn" id="4_b5uxa"]
+
+[node name="Lobby" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_y07ey")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_hfme4")
+
+[node name="AR" type="AspectRatioContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_0d3ss")
+ratio = 1.67
+
+[node name="VBox" type="VBoxContainer" parent="Panel/AR"]
+layout_mode = 2
+
+[node name="MainContainer" type="MarginContainer" parent="Panel/AR/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 36
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="VBox" type="VBoxContainer" parent="Panel/AR/VBox/MainContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="GameMode" type="RichTextLabel" parent="Panel/AR/VBox/MainContainer/VBox"]
+layout_mode = 2
+theme_override_font_sizes/bold_font_size = 40
+bbcode_enabled = true
+text = "[center][b]Game Mode[/b][/center]"
+fit_content = true
+
+[node name="Margin" type="MarginContainer" parent="Panel/AR/VBox/MainContainer/VBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 16
+
+[node name="GameType" type="RichTextLabel" parent="Panel/AR/VBox/MainContainer/VBox/Margin"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[center]Game Type[/center]"
+fit_content = true
+
+[node name="GridMargin" type="MarginContainer" parent="Panel/AR/VBox/MainContainer/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="Scroll" type="ScrollContainer" parent="Panel/AR/VBox/MainContainer/VBox/GridMargin"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Grid" type="GridContainer" parent="Panel/AR/VBox/MainContainer/VBox/GridMargin/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 2
+
+[node name="ActionContainer" type="MarginContainer" parent="Panel/AR/VBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 24
+
+[node name="HBox" type="HBoxContainer" parent="Panel/AR/VBox/ActionContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Back" parent="Panel/AR/VBox/ActionContainer/HBox" instance=ExtResource("4_b5uxa")]
+layout_mode = 2
+text = "Voltar
+"
+
+[node name="Invite" parent="Panel/AR/VBox/ActionContainer/HBox" instance=ExtResource("4_b5uxa")]
+layout_mode = 2
+text = "Convidar
+"
+
+[node name="Play" parent="Panel/AR/VBox/ActionContainer/HBox" instance=ExtResource("4_b5uxa")]
+layout_mode = 2
+text = "Jogar"

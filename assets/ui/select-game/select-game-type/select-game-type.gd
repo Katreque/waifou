@@ -8,21 +8,23 @@ func clearGameTypeItems():
 	for child in GameTypeContainer.get_children():
 		child.queue_free()
 
-func setGameTypeItems(gameMode: Lobby.GameModes):
+func setGameTypeItems(gameMode: int):
 	clearGameTypeItems()
 	
 	match gameMode:
 		Lobby.GameModes.AQUOU:
+			var firstGameType = Lobby.GameTypes[Lobby.GameModes.AQUOU].CLASSIC
 			var firstGameTypeItem = GameTypeItem.instantiate()
 			firstGameTypeItem.name = 'ClassicAquouGameTypeItem'
+			firstGameTypeItem.gameType = firstGameType
 			GameTypeContainer.add_child(firstGameTypeItem)
-			firstGameTypeItem.setTitle('Clássico')
+			firstGameTypeItem.setTitle(Lobby.GameTypesNameMap[firstGameType])
 			firstGameTypeItem.setDescription('Bem clássico mesmo!')
-			firstGameTypeItem.gameType = Lobby.AquouGameType.CLASSIC
 			
+			var secondGameType = Lobby.GameTypes[Lobby.GameModes.AQUOU].MAGIC
 			var secondGameTypeItem = GameTypeItem.instantiate()
 			secondGameTypeItem.name = 'MagicAquouGameTypeItem'
+			secondGameTypeItem.gameType = secondGameType
 			GameTypeContainer.add_child(secondGameTypeItem)
-			secondGameTypeItem.setTitle('Mágico')
+			secondGameTypeItem.setTitle(Lobby.GameTypesNameMap[secondGameType])
 			secondGameTypeItem.setDescription('Bem mágico mesmo!')
-			secondGameTypeItem.gameType = Lobby.AquouGameType.MAGIC

@@ -4,14 +4,19 @@ extends PanelContainer
 @onready var DescriptionLabel: RichTextLabel = $Card/Margin/Scroll/Margin/VBoxContainer/RichTextLabel
 @onready var ActionBtn: Button = $Card/Button
 
-var gameType
+var gameType: int
 
 func _ready() -> void:
 	ActionBtn.pressed.connect(Callable(self, 'OnActionBtnPressed'))
 
 func OnActionBtnPressed():
-	Lobby.setAquouGameType(gameType)
-	Lobby.createLobby()
+	Lobby.setGameType(gameType)
+	
+	if (!Lobby.lobbyId):
+		Core.getUserInterfaceManager().showLoadingScreen()
+		Lobby.createLobby()
+	else:
+		Core.getUserInterfaceManager().showLobbyScreen()
 
 func setTitle(title: String):
 	TitleLabel.text = '[center][b]%s[/b][/center]' % title
