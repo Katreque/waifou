@@ -1,5 +1,7 @@
 extends Control
 
+const PlayerCard = preload("res://assets/ui/lobby/player/Player.tscn")
+
 @onready var GameModeText: RichTextLabel = $Panel/AR/VBox/MainContainer/VBox/GameMode
 @onready var GameTypeText: RichTextLabel = $Panel/AR/VBox/MainContainer/VBox/Margin/GameType
 @onready var Grid: GridContainer = $Panel/AR/VBox/MainContainer/VBox/GridMargin/Scroll/Grid
@@ -26,3 +28,13 @@ func updateGameModeText(newGameModeText: String):
 	
 func updateGameTypeText(newGameTypeText: String):
 	GameTypeText.text = '[center]%s[/center]' % newGameTypeText
+
+func updatePlayersGrid():
+	for PlayerCard in Grid.get_children():
+		PlayerCard.queue_free()
+	
+	for Player in Lobby.lobbyMembers:
+		var newPlayer = PlayerCard.instantiate()
+		newPlayer.playerId = Player.steamId
+		newPlayer.playerName = Player.steamName
+		Grid.add_child(newPlayer)

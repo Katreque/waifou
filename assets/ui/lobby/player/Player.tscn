@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://qf167hxouq1l"]
+[gd_scene load_steps=5 format=3 uid="uid://qf167hxouq1l"]
 
 [ext_resource type="Theme" uid="uid://c5y7mk7u1fc0c" path="res://assets/ui/themes/default.tres" id="1_oehr7"]
 [ext_resource type="StyleBox" uid="uid://xrwn83mptu6i" path="res://assets/ui/themes/hover-panel-theme.tres" id="2_lmyig"]
 [ext_resource type="PackedScene" uid="uid://tgrpx3w0tlsy" path="res://assets/ui/components/button/Button.tscn" id="3_5ektx"]
+[ext_resource type="Script" path="res://assets/ui/lobby/player/player.gd" id="3_yob55"]
 
 [node name="Player" type="PanelContainer"]
 custom_minimum_size = Vector2(350, 0)
@@ -10,19 +11,20 @@ offset_right = 67.0
 offset_bottom = 65.0
 theme = ExtResource("1_oehr7")
 theme_override_styles/panel = ExtResource("2_lmyig")
+script = ExtResource("3_yob55")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="Margin" type="MarginContainer" parent="."]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="HBox" type="HBoxContainer" parent="Margin"]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer"]
+[node name="PlayerName" type="RichTextLabel" parent="Margin/HBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -31,7 +33,7 @@ bbcode_enabled = true
 text = "Player Name"
 fit_content = true
 
-[node name="Button" parent="MarginContainer/HBoxContainer" instance=ExtResource("3_5ektx")]
+[node name="Button" parent="Margin/HBox" instance=ExtResource("3_5ektx")]
 custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 text = "X

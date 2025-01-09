@@ -14,15 +14,10 @@ func _ready() -> void:
 	SelectGameScreen = get_parent().get_node('CanvasLayer/SelectGame')
 	
 	MainMenuScreen.get_node('Play').pressed.connect(Callable(self, 'OnMainMenuPlayPressed'))
-	Steam.lobby_created.connect(Callable(self, 'OnSteamLobbyCreated'))
-	
 	MainMenuScreen.visible = true
 
 func OnMainMenuPlayPressed():
 	SelectGameScreen.visible = true
-	
-func OnSteamLobbyCreated(_connect: int, _thisLobbyId: int):
-	hideLoadingScreen(showLobbyScreen)
 
 func showLoadingScreen():
 	LoadingScreen.visible = true
@@ -42,8 +37,7 @@ func showSelectGameScreen():
 	MainMenuScreen.visible = false
 	SelectGameScreen.visible = true
 
-func hideLoadingScreen(callback: Callable):
-	callback.call()
+func hideLoadingScreen():
 	await get_tree().create_timer(1).timeout
 	LoadingScreen.visible = false
 
