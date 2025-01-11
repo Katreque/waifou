@@ -113,4 +113,5 @@ text = "Convidar
 
 [node name="Play" parent="Panel/AR/VBox/ActionContainer/HBox" instance=ExtResource("4_b5uxa")]
 layout_mode = 2
-text = "Jogar"
+text = "Iniciar
+"

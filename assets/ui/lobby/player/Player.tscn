@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://qf167hxouq1l"]
+[gd_scene load_steps=6 format=3 uid="uid://qf167hxouq1l"]
 
 [ext_resource type="Theme" uid="uid://c5y7mk7u1fc0c" path="res://assets/ui/themes/default.tres" id="1_oehr7"]
 [ext_resource type="StyleBox" uid="uid://xrwn83mptu6i" path="res://assets/ui/themes/hover-panel-theme.tres" id="2_lmyig"]
 [ext_resource type="PackedScene" uid="uid://tgrpx3w0tlsy" path="res://assets/ui/components/button/Button.tscn" id="3_5ektx"]
 [ext_resource type="Script" path="res://assets/ui/lobby/player/player.gd" id="3_yob55"]
+[ext_resource type="Texture2D" uid="uid://bupp2itgxwrdm" path="res://assets/ui/icons/crown/crown-icon.png" id="4_txfk8"]
 
 [node name="Player" type="PanelContainer"]
 custom_minimum_size = Vector2(350, 0)
@@ -23,6 +24,17 @@ theme_override_constants/margin_bottom = 16
 [node name="HBox" type="HBoxContainer" parent="Margin"]
 layout_mode = 2
 size_flags_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="CrownIcon" type="TextureRect" parent="Margin/HBox"]
+visible = false
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_txfk8")
+expand_mode = 2
+stretch_mode = 5
 
 [node name="PlayerName" type="RichTextLabel" parent="Margin/HBox"]
 layout_mode = 2
@@ -33,7 +45,7 @@ bbcode_enabled = true
 text = "Player Name"
 fit_content = true
 
-[node name="Button" parent="Margin/HBox" instance=ExtResource("3_5ektx")]
+[node name="Remove" parent="Margin/HBox" instance=ExtResource("3_5ektx")]
 custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 text = "X

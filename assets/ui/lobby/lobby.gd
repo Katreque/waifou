@@ -10,12 +10,19 @@ const PlayerCard = preload("res://assets/ui/lobby/player/Player.tscn")
 @onready var PlayBtn: Button = $Panel/AR/VBox/ActionContainer/HBox/Play
 
 func _ready() -> void:
+	if (!Lobby.isLobbyOwner()):
+		BackBtn.text = 'Sair'
+	
 	BackBtn.pressed.connect(Callable(self, 'OnBackBtnPressed'))
 	InviteBtn.pressed.connect(Callable(self, 'OnInviteBtnPressed'))
 	PlayBtn.pressed.connect(Callable(self, 'OnPlayBtnPressed'))
 
 func OnBackBtnPressed():
-	Core.getUserInterfaceManager().showSelectGameScreen()
+	if (Lobby.isLobbyOwner()):
+		Core.getUserInterfaceManager().showSelectGameScreen()
+	else:
+		Lobby.leaveLobby()
+		Core.getUserInterfaceManager().showMainMenuScreen()
 
 func OnInviteBtnPressed():
 	Steam.activateGameOverlayInviteDialog(Lobby.lobbyId)
@@ -30,11 +37,21 @@ func updateGameTypeText(newGameTypeText: String):
 	GameTypeText.text = '[center]%s[/center]' % newGameTypeText
 
 func updatePlayersGrid():
-	for PlayerCard in Grid.get_children():
-		PlayerCard.queue_free()
+	for Card in Grid.get_children():
+		Card.queue_free()
 	
 	for Player in Lobby.lobbyMembers:
 		var newPlayer = PlayerCard.instantiate()
 		newPlayer.playerId = Player.steamId
 		newPlayer.playerName = Player.steamName
 		Grid.add_child(newPlayer)
+
+func updateLobbyToOwnerState():
+	if (Lobby.isLobbyOwner()):
+		BackBtn.text = 'Voltar'
+	
+	for Card in Grid.get_children():
+		Card.RemovePlayerBtn.visible = true
+		
+		if (Lobby.lobbyOwnerId == Card.playerId):
+			Card.CrownIcon.visible = true
