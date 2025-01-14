@@ -10,8 +10,7 @@ const PlayerCard = preload("res://assets/ui/lobby/player/Player.tscn")
 @onready var PlayBtn: Button = $Panel/AR/VBox/ActionContainer/HBox/Play
 
 func _ready() -> void:
-	if (!Lobby.isLobbyOwner()):
-		BackBtn.text = 'Sair'
+	updateLobbyBasedOnOwner()
 	
 	BackBtn.pressed.connect(Callable(self, 'OnBackBtnPressed'))
 	InviteBtn.pressed.connect(Callable(self, 'OnInviteBtnPressed'))
@@ -46,12 +45,19 @@ func updatePlayersGrid():
 		newPlayer.playerName = Player.steamName
 		Grid.add_child(newPlayer)
 
-func updateLobbyToOwnerState():
+func updateLobbyBasedOnOwner():
 	if (Lobby.isLobbyOwner()):
 		BackBtn.text = 'Voltar'
+	else:
+		BackBtn.text = 'Sair'
 	
 	for Card in Grid.get_children():
-		Card.RemovePlayerBtn.visible = true
+		if (Lobby.isLobbyOwner()):
+			Card.RemovePlayerBtn.visible = true
+		else:
+			Card.RemovePlayerBtn.visible = false
 		
 		if (Lobby.lobbyOwnerId == Card.playerId):
 			Card.CrownIcon.visible = true
+		else:
+			Card.CrownIcon.visible = false

@@ -46,11 +46,14 @@ func _ready() -> void:
 	Steam.lobby_chat_update.connect(Callable(self, 'OnLobbyChatUpdate'))
 	Steam.lobby_joined.connect(Callable(self, 'OnLobbyJoined'))
 	Steam.lobby_message.connect(Callable(self, 'OnLobbyMessageReceived'))
+	Steam.lobby_data_update.connect(Callable(self, 'OnLobbyDataUpdated'))
 
 func OnLobbyCreated(isConnected: int, thisLobbyId: int):
 	if isConnected == 1:
 		lobbyOwnerId = Steamworks.steamId
 		
+		Steam.setLobbyData(thisLobbyId, 'gameMode', str(lobbyGameMode))
+		Steam.setLobbyData(thisLobbyId, 'gameType', str(lobbyGameType))
 		Steam.setLobbyJoinable(thisLobbyId, true)
 		Steam.allowP2PPacketRelay(true)
 
@@ -58,7 +61,7 @@ func OnJoinRequested(thisLobbyId: int, _friendId: int):
 	Core.getUserInterfaceManager().showLoadingScreen()
 	Steam.joinLobby(thisLobbyId)
 	
-func OnLobbyChatUpdate(thisLobbyId: int, _playerId: int, _makingChangeId: int, _chatState: int):
+func OnLobbyChatUpdate(_thisLobbyId: int, _playerId: int, _makingChangeId: int, _chatState: int):
 	fetchLobbyMembers()
 
 func OnLobbyJoined(thisLobbyId: int, _permissions: int, _locked: bool, response: int):
@@ -66,10 +69,7 @@ func OnLobbyJoined(thisLobbyId: int, _permissions: int, _locked: bool, response:
 		lobbyId = thisLobbyId
 		
 		if (!isLobbyOwner()):
-			setGameMode(int(Steam.getLobbyData(thisLobbyId, 'gameMode')))
-			setGameType(int(Steam.getLobbyData(thisLobbyId, 'gameType')))
-			print(lobbyGameMode)
-			print(lobbyGameType)
+			updateLobbyData(thisLobbyId)
 			
 		fetchLobbyMembers()
 		Core.getUserInterfaceManager().showLobbyScreen()
@@ -92,10 +92,15 @@ func OnLobbyJoined(thisLobbyId: int, _permissions: int, _locked: bool, response:
 		print("Failed to join this chat room: %s" % fail_reason)
 
 func OnLobbyMessageReceived(_thisLobbyId: int, user: int, message: String, _chatType: int):
-	#if (user == lobbyOwnerId && message.split('-')[0] == 'kick'):
-		#leaveLobby()
-		#RETOMAR DAQUI
-	pass
+	if (user == lobbyOwnerId && message.begins_with('!')):
+		var action = message.split('-')[0]
+		var playerId = message.split('-')[1]
+		
+		if (action == '!kick' && Steamworks.steamId == int(playerId)):
+			leaveLobby()
+
+func OnLobbyDataUpdated(_success: int, thisLobbyId: int, _thisMemberId: int):
+	updateLobbyData(thisLobbyId)
 
 func isLobbyOwner() -> bool:
 	if (lobbyOwnerId == Steamworks.steamId):
@@ -111,7 +116,9 @@ func checkIfPlayerWasInvitedWithTheGameClosed():
 
 func setGameMode(gameMode: int):
 	lobbyGameMode = gameMode
-	Steam.setLobbyData(lobbyId, 'gameMode', str(gameMode))
+	if (Lobby.isLobbyOwner() && lobbyId):
+		Steam.setLobbyData(lobbyId, 'gameMode', str(gameMode))
+		
 	Core.getUserInterfaceManager().updateLobbyScreenGameMode(getGameModeName())
 
 func getGameModeName() -> String:
@@ -122,9 +129,11 @@ func getGameModeName() -> String:
 
 func setGameType(gameType: int):
 	lobbyGameType = gameType
-	Steam.setLobbyData(lobbyId, 'gameType', str(gameType))
+	if (Lobby.isLobbyOwner() && lobbyId):
+		Steam.setLobbyData(lobbyId, 'gameType', str(gameType))
+		
 	Core.getUserInterfaceManager().updateLobbyScreenGameType(getGameTypeName())
-	
+
 func getGameTypeName() -> String:
 	if (lobbyGameType):
 		return GameTypesNameMap[lobbyGameType]
@@ -142,7 +151,7 @@ func createLobby():
 		Core.getUserInterfaceManager().showLoadingScreen()
 		Steam.createLobby(Steam.LOBBY_TYPE_FRIENDS_ONLY, maxPlayers)
 
-func fetchLobbyMembers():	
+func fetchLobbyMembers():
 	lobbyMembers.clear()
 	var numberOfMembers: int = Steam.getNumLobbyMembers(lobbyId)
 	for member in range(0, numberOfMembers):
@@ -156,14 +165,19 @@ func fetchLobbyMembers():
 		
 	lobbyOwnerId = Steam.getLobbyOwner(lobbyId)
 	Core.getUserInterfaceManager().LobbyScreen.updatePlayersGrid()
-	Core.getUserInterfaceManager().LobbyScreen.updateLobbyToOwnerState()
+	Core.getUserInterfaceManager().LobbyScreen.updateLobbyBasedOnOwner()
 
 func kickMemberFromLobby(memberSteamId: int):
 	if (isLobbyOwner()):
-		Steam.sendLobbyChatMsg(lobbyId, 'kick-%s' % memberSteamId)
+		Steam.sendLobbyChatMsg(lobbyId, '!kick-%s' % memberSteamId)
 
 func leaveLobby():
 	if lobbyId != 0:
 		Steam.leaveLobby(lobbyId)
 		lobbyId = 0
 		lobbyMembers.clear()
+		Core.getUserInterfaceManager().showMainMenuScreen()
+
+func updateLobbyData(thisLobbyId: int):
+	setGameMode(int(Steam.getLobbyData(thisLobbyId, 'gameMode')))
+	setGameType(int(Steam.getLobbyData(thisLobbyId, 'gameType')))
